@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { FlatList, View, ActivityIndicator, Text } from "react-native";
 import { getLatestCharacter } from "../lib/character";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { AnimatedCharacterCard } from "./CharacterCard";
+import { AnimatedCharacterCard } from "./sections/CharacterCard";
 
 export function Main() {
   const [characters, setCharacters] = useState([]);

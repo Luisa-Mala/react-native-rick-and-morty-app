@@ -1,7 +1,7 @@
 import { Stack } from "expo-router";
 import { View } from "react-native";
-import { Logo } from "../components/Logo";
-import { MenuIcon } from "../components/Icons";
+import { Logo } from "../components/elements/Logo";
+import { MenuIcon } from "../components/elements/Icons";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";

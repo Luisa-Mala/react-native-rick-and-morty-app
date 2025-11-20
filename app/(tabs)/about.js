@@ -1,6 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import { ScrollView } from "react-native";
-import { GlobalText as Text } from "../../components/GlobalText";
+import { GlobalText as Text } from "../../components/elements/GlobalText";
 
 export default function About() {
   return (

@@ -7,9 +7,9 @@ import {
   Image,
   StyleSheet,
 } from "react-native";
-import { GlobalText as Text } from "../components/GlobalText";
+import { GlobalText as Text } from "../components/elements/GlobalText";
 import { getCharacterDetails } from "../lib/character";
-import { Status } from "../components/Status";
+import { Status } from "../components/elements/Status";
 
 export default function CharacterDetail() {
   const { id } = useLocalSearchParams();

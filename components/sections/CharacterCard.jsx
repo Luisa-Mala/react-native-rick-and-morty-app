@@ -7,7 +7,7 @@ import {
   Animated,
   Pressable,
 } from "react-native";
-import { Status } from "./Status";
+import { Status } from "../elements/Status";
 import { Link } from "expo-router";
 import { styled } from "nativewind";
 
