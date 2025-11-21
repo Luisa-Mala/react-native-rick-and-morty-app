@@ -1,5 +1,5 @@
 import { Tabs } from "expo-router";
-import { HomeIcon, InfoIcon } from "../../components/elements/Icons";
+import { HomeIcon, InfoIcon } from "@/components";
 
 export default function TabsLayout() {
   return (

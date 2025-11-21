@@ -1,11 +1,15 @@
-import { Image, TouchableHighlight, View } from "react-native";
-import { GlobalText as Text } from "../components/elements/GlobalText";
+import { Image, TouchableHighlight, View, useColorScheme } from "react-native";
+import { GlobalText as Text } from "@/components";
 import { Stack } from "expo-router";
 import { useRouter } from "expo-router";
+import { lightTheme, darkTheme } from "../themes";
 
-const hero = require("../assets/hero.png");
+const hero = require("@/assets/hero.png");
+
 export default function Index() {
   const router = useRouter();
+  const colorScheme = useColorScheme();
+  const theme = colorScheme === "dark" ? darkTheme : lightTheme;
 
   const goToHome = () => {
     // Navega directamente a la pantalla home dentro de las tabs
@@ -19,17 +23,22 @@ export default function Index() {
           flex: 1,
           justifyContent: "start",
           alignItems: "center",
-          backgroundColor: "#1A1A1A",
+          backgroundColor: theme.colors.background,
         }}
       >
         <Image style={{ width: "100%" }} source={hero} />
         <Text
-          className="px-4 pb-8 pt-4  text-center text-white"
-          style={{ fontSize: 32, fontFamily: "BBH-Sans-Hegarty" }}
+          className="px-4 py-6 text-center"
+          style={{
+            fontSize: 32,
+            fontFamily: "BBH-Sans-Hegarty",
+            color: theme.colors.text,
+            lineHeight: 33,
+          }}
         >
           Bienvenido a este universo
         </Text>
-        <Text className="text-center pb-8 text-white">
+        <Text className="text-center pb-8" style={{ color: theme.colors.text }}>
           Tu portal a todos los personajes, lugares y episodios del multiverso
           de Rick y Morty.
         </Text>
