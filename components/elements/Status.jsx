@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
 
-export function Status({ state, species, props }) {
+export default function Status({ state, species, props }) {
   const getColor = () => {
     switch (state) {
       case "Alive":

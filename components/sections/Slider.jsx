@@ -1,0 +1,156 @@
+import {
+  View,
+  Image,
+  StyleSheet,
+  FlatList,
+  useColorScheme,
+} from "react-native";
+import { lightTheme, darkTheme } from "../../themes";
+import { GlobalText as Text } from "@/components/elements";
+
+export default function Slider({
+  characters = [],
+  title,
+  widthCard,
+  heightCard,
+}) {
+  const colorScheme = useColorScheme();
+  const theme = colorScheme === "dark" ? darkTheme : lightTheme;
+
+  // Datos de ejemplo
+  const defaultCharacters = [
+    {
+      id: 1,
+      name: "Fear No Mort",
+      image: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+      status: "Alive",
+      species: "Human",
+    },
+    {
+      id: 2,
+      name: "Morty Smith",
+      image: "https://rickandmortyapi.com/api/character/avatar/2.jpeg",
+      status: "Alive",
+      species: "Human",
+    },
+    {
+      id: 3,
+      name: "Summer Smith",
+      image: "https://rickandmortyapi.com/api/character/avatar/3.jpeg",
+      status: "Alive",
+      species: "Human",
+    },
+    {
+      id: 4,
+      name: "Beth Smith",
+      image: "https://rickandmortyapi.com/api/character/avatar/4.jpeg",
+      status: "Alive",
+      species: "Human",
+    },
+    {
+      id: 5,
+      name: "Fear No Mort",
+      image: require("@/assets/episodes/episode-1.png"),
+      status: "Alive",
+      species: "S07E09",
+    },
+  ];
+
+  // const defaultCharacters = [
+  //   {
+  //     id: 1,
+  //     name: "Fear No Mort",
+  //     image: require("@/assets/episodes/episode-1.png"),
+  //     status: "Alive",
+  //     species: "S07E09",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Mort: Ragnarick",
+  //     image: require("@/assets/episodes/episode-2.png"),
+  //     status: "Alive",
+  //     species: "S07E10",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Rise of the Numbericons",
+  //     image: require("@/assets/episodes/episode-1.png"),
+  //     species: "S07E08",
+  //   },
+  // ];
+
+  const data = characters.length > 0 ? characters : defaultCharacters;
+
+  const renderCharacter = ({ item }) => (
+    <View style={[styles.characterCard, { width: widthCard || 160 }]}>
+      <Image
+        source={
+          typeof item.image === "number"
+            ? item.image // Local
+            : { uri: item.image } // Externa
+        }
+        style={[styles.characterImage, { height: heightCard || 200 }]}
+        resizeMode="cover"
+      />
+      <View style={styles.characterInfo}>
+        <Text style={[styles.characterName, { color: theme.colors.text }]}>
+          {item.name}
+        </Text>
+        <Text style={[styles.characterDetails, { color: theme.colors.text }]}>
+          {item.species} • {item.status}
+        </Text>
+      </View>
+    </View>
+  );
+
+  return (
+    <View style={styles.container}>
+      <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
+        {title}
+      </Text>
+      <FlatList
+        data={data}
+        renderItem={renderCharacter}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        keyExtractor={(item) => item.id.toString()}
+        contentContainerStyle={styles.listContent}
+        snapToAlignment="start"
+        decelerationRate="fast"
+        snapToInterval={160} // Ancho de tarjeta + margen
+      />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    marginVertical: 16,
+  },
+  sectionTitle: {
+    fontSize: 20,
+    marginBottom: 16,
+    marginLeft: 16,
+    fontFamily: "BBH-Sans-Hegarty",
+  },
+  listContent: {
+    paddingHorizontal: 12,
+  },
+  characterCard: {
+    marginHorizontal: 8,
+  },
+  characterImage: {
+    width: "100%",
+    borderRadius: 12,
+  },
+  characterInfo: {
+    paddingTop: 12,
+  },
+  characterName: {
+    fontSize: 14,
+    fontWeight: "bold",
+  },
+  characterDetails: {
+    fontSize: 12,
+  },
+});

@@ -1,2 +1,2 @@
-export * from "./CharacterCard";
-export * from "./Carousel";
+export { default as Slider } from "./Slider";
+export { default as AnimatedCharacterCard } from "./CharacterCard";

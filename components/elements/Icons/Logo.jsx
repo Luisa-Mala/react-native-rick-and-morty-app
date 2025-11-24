@@ -1,7 +1,7 @@
 import { Text, View } from "react-native";
 import Svg, { Path } from "react-native-svg";
 
-export const Logo = (props) => (
+export default function Logo(props) {
   <View
     style={{
       flexDirection: "row",
@@ -15,5 +15,5 @@ export const Logo = (props) => (
     <Text style={{ fontSize: 16, fontFamily: "BBH-Sans-Hegarty" }}>
       Rick & Morty
     </Text>
-  </View>
-);
+  </View>;
+}

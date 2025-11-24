@@ -7,7 +7,7 @@ import {
   Image,
   StyleSheet,
 } from "react-native";
-import { Status, GlobalText as Text } from "@/components";
+import { Status, GlobalText as Text } from "@/components/elements";
 import { getCharacterDetails } from "@/lib/character";
 
 export default function CharacterDetail() {

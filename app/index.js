@@ -1,5 +1,5 @@
 import { Image, TouchableHighlight, View, useColorScheme } from "react-native";
-import { GlobalText as Text } from "@/components";
+import { GlobalText as Text } from "@/components/elements";
 import { Stack } from "expo-router";
 import { useRouter } from "expo-router";
 import { lightTheme, darkTheme } from "../themes";

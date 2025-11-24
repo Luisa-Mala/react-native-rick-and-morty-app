@@ -29,7 +29,7 @@ export function CharacterCard({ character }) {
   );
 }
 
-export function AnimatedCharacterCard({ character, index }) {
+export default function AnimatedCharacterCard({ character, index }) {
   const opacity = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {

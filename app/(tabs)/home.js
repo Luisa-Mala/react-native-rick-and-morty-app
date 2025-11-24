@@ -1,19 +1,34 @@
+import { useEffect, useState } from "react";
 import {
   ImageBackground,
   ScrollView,
   View,
   useColorScheme,
+  ActivityIndicator,
 } from "react-native";
+
 import { LinearGradient } from "expo-linear-gradient";
 import { lightTheme, darkTheme } from "../../themes";
 
-import { Carousel, GlobalText as Text } from "@/components";
+import { GlobalText as Text } from "@/components/elements";
+import { Slider } from "@/components/sections";
+
+import { getLatestCharacter } from "@/lib/character";
 
 const heroHome = require("@/assets/hero-home.png");
 
 export default function Home() {
+  const [characters, setCharacters] = useState([]);
+
   const colorScheme = useColorScheme();
   const theme = colorScheme === "dark" ? darkTheme : lightTheme;
+
+  useEffect(() => {
+    getLatestCharacter().then((games) => {
+      setCharacters(games);
+    });
+  }, []);
+
   return (
     <ScrollView>
       <View
@@ -54,7 +69,21 @@ export default function Home() {
           </ImageBackground>
         </View>
 
-        <Carousel></Carousel>
+        <View style={{ flex: 1 }}>
+          {characters.length === 0 ? (
+            /** LOADING */
+            <ActivityIndicator color={"#00ff2aff"} size={"large"} />
+          ) : (
+            <Slider title={"Personajes Populares"} data={characters} />
+          )}
+        </View>
+        <View style={{ flex: 1 }}>
+          <Slider
+            title={"Ultimos episodios"}
+            widthCard={250}
+            heightCard={150}
+          />
+        </View>
       </View>
     </ScrollView>
   );

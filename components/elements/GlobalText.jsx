@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export function GlobalText(props) {
+export default function GlobalText(props) {
   // 1. Combina los estilos globales con los estilos pasados por el usuario
   return (
     <Text {...props} style={[styles.defaultText, props.style]}>
