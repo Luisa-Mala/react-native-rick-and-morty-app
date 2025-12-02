@@ -1,13 +1,18 @@
 import { Tabs } from "expo-router";
-import { HomeIcon, InfoIcon } from "@/components/elements/Icons";
+import {
+  CharacterIcon,
+  EpisodeIcon,
+  HomeIcon,
+  LocationIcon,
+} from "@/components/elements/Icons";
 
 export default function TabsLayout() {
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: "#ff9800",
-        tabBarStyle: { backgroundColor: "#3c3e44" },
+        tabBarActiveTintColor: "#13ec5b",
+        tabBarStyle: { backgroundColor: "#16191a" },
         tabBarLabelPosition: "below-icon",
       }}
     >
@@ -19,10 +24,24 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="about"
+        name="characters"
         options={{
-          title: "About",
-          tabBarIcon: ({ color }) => <InfoIcon color={color} />,
+          title: "Personajes",
+          tabBarIcon: ({ color }) => <CharacterIcon color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="episodes"
+        options={{
+          title: "Episodios",
+          tabBarIcon: ({ color }) => <EpisodeIcon color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="locations"
+        options={{
+          title: "Ubicaciones",
+          tabBarIcon: ({ color }) => <LocationIcon color={color} />,
         }}
       />
     </Tabs>

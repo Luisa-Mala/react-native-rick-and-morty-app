@@ -24,7 +24,7 @@ export default function Home() {
   const theme = colorScheme === "dark" ? darkTheme : lightTheme;
 
   useEffect(() => {
-    getLatestCharacter().then((games) => {
+    getLatestCharacter(5).then((games) => {
       setCharacters(games);
     });
   }, []);
@@ -69,21 +69,23 @@ export default function Home() {
           </ImageBackground>
         </View>
 
-        <View style={{ flex: 1 }}>
-          {characters.length === 0 ? (
-            /** LOADING */
-            <ActivityIndicator color={"#00ff2aff"} size={"large"} />
-          ) : (
-            <Slider title={"Personajes Populares"} data={characters} />
-          )}
-        </View>
-        <View style={{ flex: 1 }}>
-          <Slider
-            title={"Ultimos episodios"}
-            widthCard={250}
-            heightCard={150}
-          />
-        </View>
+        {characters.length === 0 ? (
+          /** LOADING */
+          <ActivityIndicator color={"#00ff2aff"} size={"large"} />
+        ) : (
+          <>
+            <View style={{ flex: 1 }}>
+              <Slider title={"Personajes Populares"} characters={characters} />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Slider
+                title={"Ultimos episodios"}
+                widthCard={250}
+                heightCard={150}
+              />
+            </View>
+          </>
+        )}
       </View>
     </ScrollView>
   );

@@ -4,9 +4,14 @@ import {
   StyleSheet,
   FlatList,
   useColorScheme,
+  Pressable,
 } from "react-native";
 import { lightTheme, darkTheme } from "../../themes";
 import { GlobalText as Text } from "@/components/elements";
+import { Link } from "expo-router";
+import { styled } from "nativewind";
+
+const StyledPressable = styled(Pressable);
 
 export default function Slider({
   characters = [],
@@ -17,90 +22,55 @@ export default function Slider({
   const colorScheme = useColorScheme();
   const theme = colorScheme === "dark" ? darkTheme : lightTheme;
 
-  // Datos de ejemplo
   const defaultCharacters = [
     {
       id: 1,
       name: "Fear No Mort",
-      image: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-      status: "Alive",
-      species: "Human",
+      image: require("@/assets/episodes/episode-1.png"),
+      species: "S07E09",
     },
     {
       id: 2,
-      name: "Morty Smith",
-      image: "https://rickandmortyapi.com/api/character/avatar/2.jpeg",
-      status: "Alive",
-      species: "Human",
+      name: "Mort: Ragnarick",
+      image: require("@/assets/episodes/episode-2.png"),
+      species: "S07E10",
     },
     {
       id: 3,
-      name: "Summer Smith",
-      image: "https://rickandmortyapi.com/api/character/avatar/3.jpeg",
-      status: "Alive",
-      species: "Human",
-    },
-    {
-      id: 4,
-      name: "Beth Smith",
-      image: "https://rickandmortyapi.com/api/character/avatar/4.jpeg",
-      status: "Alive",
-      species: "Human",
-    },
-    {
-      id: 5,
-      name: "Fear No Mort",
+      name: "Rise of the Numbericons",
       image: require("@/assets/episodes/episode-1.png"),
-      status: "Alive",
-      species: "S07E09",
+      species: "S07E08",
     },
   ];
-
-  // const defaultCharacters = [
-  //   {
-  //     id: 1,
-  //     name: "Fear No Mort",
-  //     image: require("@/assets/episodes/episode-1.png"),
-  //     status: "Alive",
-  //     species: "S07E09",
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Mort: Ragnarick",
-  //     image: require("@/assets/episodes/episode-2.png"),
-  //     status: "Alive",
-  //     species: "S07E10",
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Rise of the Numbericons",
-  //     image: require("@/assets/episodes/episode-1.png"),
-  //     species: "S07E08",
-  //   },
-  // ];
 
   const data = characters.length > 0 ? characters : defaultCharacters;
 
   const renderCharacter = ({ item }) => (
-    <View style={[styles.characterCard, { width: widthCard || 160 }]}>
-      <Image
-        source={
-          typeof item.image === "number"
-            ? item.image // Local
-            : { uri: item.image } // Externa
-        }
-        style={[styles.characterImage, { height: heightCard || 200 }]}
-        resizeMode="cover"
-      />
-      <View style={styles.characterInfo}>
-        <Text style={[styles.characterName, { color: theme.colors.text }]}>
-          {item.name}
-        </Text>
-        <Text style={[styles.characterDetails, { color: theme.colors.text }]}>
-          {item.species} • {item.status}
-        </Text>
-      </View>
-    </View>
+    <Link href={`/${item.id}`} asChild>
+      <StyledPressable className="active:opacity-70">
+        <View style={[styles.characterCard, { width: widthCard || 160 }]}>
+          <Image
+            source={
+              typeof item.image === "number"
+                ? item.image // Local
+                : { uri: item.image } // Externa
+            }
+            style={[styles.characterImage, { height: heightCard || 200 }]}
+            resizeMode="cover"
+          />
+          <View style={styles.characterInfo}>
+            <Text style={[styles.characterName, { color: theme.colors.text }]}>
+              {item.name}
+            </Text>
+            <Text
+              style={[styles.characterDetails, { color: theme.colors.text }]}
+            >
+              {item.species} {item.status ? `• ${item.status}` : ""}
+            </Text>
+          </View>
+        </View>
+      </StyledPressable>
+    </Link>
   );
 
   return (
