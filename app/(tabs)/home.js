@@ -37,6 +37,7 @@ export default function Home() {
           justifyContent: "start",
           // alignItems: "center",
           backgroundColor: theme.colors.background,
+          minHeight: "100%",
         }}
       >
         <View className="px-4 py-3">
