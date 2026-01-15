@@ -1,12 +1,7 @@
-import {
-  View,
-  Image,
-  StyleSheet,
-  FlatList,
-  useColorScheme,
-  Pressable,
-} from "react-native";
+import { View, Image, StyleSheet, FlatList, Pressable } from "react-native";
 import { lightTheme, darkTheme } from "../../themes";
+import { useColorScheme } from "@/lib/ColorSchemeContext";
+
 import { GlobalText as Text } from "@/components/elements";
 import { Link } from "expo-router";
 import { styled } from "nativewind";
@@ -19,8 +14,8 @@ export default function Slider({
   widthCard,
   heightCard,
 }) {
-  const colorScheme = useColorScheme();
-  const theme = colorScheme === "dark" ? darkTheme : lightTheme;
+  const { isDarkMode } = useColorScheme();
+  const theme = isDarkMode ? darkTheme : lightTheme;
 
   const defaultCharacters = [
     {
@@ -59,12 +54,10 @@ export default function Slider({
             resizeMode="cover"
           />
           <View style={styles.characterInfo}>
-            <Text style={[styles.characterName, { color: theme.colors.text }]}>
+            <Text style={[styles.characterName, { color: theme.text }]}>
               {item.name}
             </Text>
-            <Text
-              style={[styles.characterDetails, { color: theme.colors.text }]}
-            >
+            <Text style={[styles.characterDetails, { color: theme.text }]}>
               {item.species} {item.status ? `• ${item.status}` : ""}
             </Text>
           </View>
@@ -75,9 +68,7 @@ export default function Slider({
 
   return (
     <View style={styles.container}>
-      <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
-        {title}
-      </Text>
+      <Text style={[styles.sectionTitle, { color: theme.text }]}>{title}</Text>
       <FlatList
         data={data}
         renderItem={renderCharacter}

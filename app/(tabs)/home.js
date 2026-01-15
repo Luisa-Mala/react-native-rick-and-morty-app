@@ -3,7 +3,6 @@ import {
   ImageBackground,
   ScrollView,
   View,
-  useColorScheme,
   ActivityIndicator,
 } from "react-native";
 
@@ -12,7 +11,7 @@ import { lightTheme, darkTheme } from "../../themes";
 
 import { GlobalText as Text } from "@/components/elements";
 import { Slider } from "@/components/sections";
-
+import { useColorScheme } from "@/lib/ColorSchemeContext";
 import { getLatestCharacter } from "@/lib/character";
 
 const heroHome = require("@/assets/hero-home.png");
@@ -20,8 +19,8 @@ const heroHome = require("@/assets/hero-home.png");
 export default function Home() {
   const [characters, setCharacters] = useState([]);
 
-  const colorScheme = useColorScheme();
-  const theme = colorScheme === "dark" ? darkTheme : lightTheme;
+  const { isDarkMode } = useColorScheme();
+  const theme = isDarkMode ? darkTheme : lightTheme;
 
   useEffect(() => {
     getLatestCharacter(5).then((games) => {
@@ -36,7 +35,7 @@ export default function Home() {
           flex: 1,
           justifyContent: "start",
           // alignItems: "center",
-          backgroundColor: theme.colors.background,
+          backgroundColor: theme.background,
           minHeight: "100%",
         }}
       >

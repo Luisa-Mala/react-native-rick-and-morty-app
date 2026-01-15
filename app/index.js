@@ -1,20 +1,22 @@
-import { Image, TouchableHighlight, View, useColorScheme } from "react-native";
+import { Image, TouchableHighlight, View } from "react-native"; // Eliminamos useColorScheme de aquí
 import { GlobalText as Text } from "@/components/elements";
-import { Stack } from "expo-router";
-import { useRouter } from "expo-router";
+import { Stack, useRouter } from "expo-router";
+import { useColorScheme } from "@/lib/ColorSchemeContext"; // 🎯 Importamos tu contexto personalizado
 import { lightTheme, darkTheme } from "../themes";
 
 const hero = require("@/assets/hero.png");
 
 export default function Index() {
   const router = useRouter();
-  const colorScheme = useColorScheme();
-  const theme = colorScheme === "dark" ? darkTheme : lightTheme;
+
+  // 🎯 Usamos tu hook para obtener isDarkMode (que reacciona al toggle y al sistema)
+  const { isDarkMode } = useColorScheme();
+  const theme = isDarkMode ? darkTheme : lightTheme;
 
   const goToHome = () => {
-    // Navega directamente a la pantalla home dentro de las tabs
     router.push("/(tabs)/home");
   };
+
   return (
     <>
       <Stack.Screen options={{ headerShown: false }} />
@@ -23,25 +25,29 @@ export default function Index() {
           flex: 1,
           justifyContent: "start",
           alignItems: "center",
-          backgroundColor: theme.colors.background,
+          // 🎯 Ahora backgroundColor cambiará dinámicamente
+          backgroundColor: theme.background,
         }}
       >
         <Image style={{ width: "100%" }} source={hero} />
+
         <Text
           className="px-4 py-6 text-center"
           style={{
             fontSize: 32,
             fontFamily: "BBH-Sans-Hegarty",
-            color: theme.colors.text,
+            color: theme.text, // 🎯 Texto dinámico
             lineHeight: 33,
           }}
         >
           Bienvenido a este universo
         </Text>
-        <Text className="text-center pb-8" style={{ color: theme.colors.text }}>
+
+        <Text className="text-center pb-8" style={{ color: theme.text }}>
           Tu portal a todos los personajes, lugares y episodios del multiverso
           de Rick y Morty.
         </Text>
+
         <TouchableHighlight
           underlayColor={"#13ec5b"}
           onPress={goToHome}
@@ -49,13 +55,12 @@ export default function Index() {
             maxWidth: 480,
             minWidth: 84,
             padding: 10,
-            paddingLeft: 20,
-            paddingRight: 20,
+            paddingHorizontal: 20,
             backgroundColor: "#13ec5b",
             borderRadius: 8,
           }}
         >
-          <Text className="bold" style={{ fontWeith: 700 }}>
+          <Text style={{ fontWeight: "700", color: "#000" }}>
             ¡Wubba Lubba Dub Dub!
           </Text>
         </TouchableHighlight>

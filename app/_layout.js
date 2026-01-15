@@ -1,4 +1,6 @@
 import { Stack } from "expo-router";
+import { ColorSchemeProvider } from "../lib/ColorSchemeContext";
+
 import { View } from "react-native";
 import { MenuIcon, Logo } from "@/components/elements/Icons";
 import { useFonts } from "expo-font";
@@ -7,7 +9,7 @@ import { useEffect } from "react";
 import { DMSans_400Regular } from "@expo-google-fonts/dm-sans";
 SplashScreen.preventAutoHideAsync();
 
-export default function Layout() {
+export default function RootLayout() {
   const [loaded, error] = useFonts({
     "DM-Sans-Regular": DMSans_400Regular,
     "BBH-Sans-Hegarty": require("../assets/fonts/BBHSansHegarty-Regular.ttf"),
@@ -24,14 +26,16 @@ export default function Layout() {
   }
   return (
     <View style={{ flex: 1 }}>
-      <Stack
-        screenOptions={{
-          headerStyle: { backgroundColor: "#fff" },
-          headerTitle: "",
-          headerLeft: () => <Logo />,
-          headerRight: () => <MenuIcon />,
-        }}
-      />
+      <ColorSchemeProvider>
+        <Stack
+          screenOptions={{
+            headerStyle: { backgroundColor: "#fff" },
+            headerTitle: "",
+            headerLeft: () => <Logo />,
+            headerRight: () => <MenuIcon />,
+          }}
+        />
+      </ColorSchemeProvider>
     </View>
   );
 }
