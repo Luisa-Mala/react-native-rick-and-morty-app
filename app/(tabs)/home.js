@@ -9,7 +9,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import { lightTheme, darkTheme } from "../../themes";
 
-import { GlobalText as Text } from "@/components/elements";
+import { Card, GlobalText as Text } from "@/components/elements";
 import { Slider } from "@/components/sections";
 import { useColorScheme } from "@/lib/ColorSchemeContext";
 import { getLatestCharacter } from "@/lib/character";
@@ -71,7 +71,9 @@ export default function Home() {
 
         {characters.length === 0 ? (
           /** LOADING */
-          <ActivityIndicator color={"#00ff2aff"} size={"large"} />
+          <View style={{ height: 200 }}>
+            <ActivityIndicator color={"#00ff2aff"} size={"large"} />
+          </View>
         ) : (
           <>
             <View style={{ flex: 1 }}>
@@ -86,6 +88,40 @@ export default function Home() {
             </View>
           </>
         )}
+        <View style={{ paddingBottom: 20 }}>
+          <Text
+            style={{
+              fontSize: 20,
+              marginBottom: 16,
+              marginTop: 20,
+              marginLeft: 16,
+              fontFamily: "BBH-Sans-Hegarty",
+              color: theme.text,
+            }}
+          >
+            Explora el Multiverso
+          </Text>
+          <View className="flex flex-col items-center">
+            <Card
+              icon={"people-outline"}
+              title={"Personajes"}
+              description={"Ver todos los personajes"}
+              url={"/characters"}
+            />
+
+            <Card
+              title={"Episodios"}
+              description={"Lista de episodios"}
+              url={"/episodes"}
+            />
+            <Card
+              icon={"planet-outline"}
+              title={"Ubicaciones"}
+              description={"Explorar ubicaciones"}
+              url={"/location"}
+            />
+          </View>
+        </View>
       </View>
     </ScrollView>
   );
