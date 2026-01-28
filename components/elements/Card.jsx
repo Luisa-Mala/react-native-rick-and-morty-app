@@ -1,8 +1,9 @@
 import { useColorScheme } from "@/lib/ColorSchemeContext";
 import { darkTheme, lightTheme } from "@/themes";
 import { View, StyleSheet, Pressable } from "react-native";
-import { IonIcons, GlobalText as Text } from "@/components/elements";
+import GlobalText from "./GlobalText";
 import { EpisodeIcon } from "./Icons";
+import IonIcons from "./IonIcons";
 import { Link } from "expo-router";
 import { styled } from "nativewind";
 
@@ -35,9 +36,11 @@ export default function Card({ icon, title, code, description, url }) {
             }}
           >
             <View>
-              <Text style={styles.title}>{title}</Text>
-              {code ? <Text style={styles.text}>{code}</Text> : null}
-              <Text style={styles.text}>{description}</Text>
+              <GlobalText style={styles.title}>{title}</GlobalText>
+              {code ? (
+                <GlobalText style={styles.text}>{code}</GlobalText>
+              ) : null}
+              <GlobalText style={styles.text}>{description}</GlobalText>
             </View>
             <IonIcons name={"arrow-forward"} color={theme.cardText} />
           </View>

@@ -90,12 +90,8 @@ export default function Home() {
         )}
         <View style={{ paddingBottom: 20 }}>
           <Text
+            isTitle={true}
             style={{
-              fontSize: 20,
-              marginBottom: 16,
-              marginTop: 20,
-              marginLeft: 16,
-              fontFamily: "BBH-Sans-Hegarty",
               color: theme.text,
             }}
           >

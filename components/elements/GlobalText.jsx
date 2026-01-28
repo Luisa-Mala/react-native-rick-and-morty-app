@@ -1,19 +1,25 @@
 import { Text, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  // Define tu fuente global por defecto aquí
   defaultText: {
-    fontFamily: "DM-Sans-Regular", // Usando DM Sans como ejemplo
-    // Opcional: define un color o tamaño de fuente base
+    fontFamily: "DM-Sans-Regular",
     fontSize: 16,
+  },
+  defaultTitle: {
+    fontSize: 20,
+    marginBottom: 16,
+    marginTop: 20,
+    marginLeft: 16,
+    fontFamily: "BBH-Sans-Hegarty",
   },
 });
 
-export default function GlobalText(props) {
-  // 1. Combina los estilos globales con los estilos pasados por el usuario
+export default function GlobalText({ isTitle, children, style, ...props }) {
+  const baseStyle = isTitle ? styles.defaultTitle : styles.defaultText;
+
   return (
-    <Text {...props} style={[styles.defaultText, props.style]}>
-      {props.children}
+    <Text {...props} style={[baseStyle, style]}>
+      {children}
     </Text>
   );
 }

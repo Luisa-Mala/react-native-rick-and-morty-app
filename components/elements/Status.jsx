@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
 
-export default function Status({ state, species, props }) {
+export default function Status({ state, species, props, theme }) {
   const getColor = () => {
     switch (state) {
       case "Alive":
@@ -15,7 +15,10 @@ export default function Status({ state, species, props }) {
   return (
     <View className="flex-row gap-2 items-center" {...props}>
       <View className={`${className} w-2 h-2 rounded-full`}></View>
-      <Text className="text-white" style={{ fontFamily: "DM-Sans-Regular" }}>
+      <Text
+        // className="text-white"
+        style={{ fontFamily: "DM-Sans-Regular", color: theme?.text }}
+      >
         {state} {species && `- ` + species}
       </Text>
     </View>
