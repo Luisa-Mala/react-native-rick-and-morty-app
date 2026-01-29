@@ -6,11 +6,17 @@ import {
   ScrollView,
   Image,
   StyleSheet,
+  TouchableHighlight,
 } from "react-native";
-import { Status, GlobalText as Text } from "@/components/elements";
+import { IonIcons, Status, GlobalText as Text } from "@/components/elements";
 import { getCharacterDetails } from "@/lib/character";
+import { lightTheme, darkTheme } from "@/themes";
+import { useColorScheme } from "@/lib/ColorSchemeContext";
 
 export default function CharacterDetail() {
+  const { isDarkMode } = useColorScheme();
+  const theme = isDarkMode ? darkTheme : lightTheme;
+
   const { id } = useLocalSearchParams();
   const [characterInfo, setCharacterInfo] = useState(null);
 
@@ -20,10 +26,17 @@ export default function CharacterDetail() {
     }
   }, [id]);
 
+  const styles = styling(theme);
+
   return (
     <>
       <Stack.Screen
         options={{
+          title: characterInfo && characterInfo.name,
+          headerTitleStyle: {
+            fontWeight: "bold",
+            color: theme.text,
+          },
           headerLeft: () => {},
         }}
       />
@@ -32,7 +45,7 @@ export default function CharacterDetail() {
           flex: 1,
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: "#272b33",
+          backgroundColor: theme.background,
         }}
       >
         <View>
@@ -40,55 +53,99 @@ export default function CharacterDetail() {
             <ActivityIndicator size={"large"} color="#00ff00" />
           ) : (
             <ScrollView
-              contentContainerStyle={{
-                justifyContent: "center",
-                alignItems: "center",
-                flexGrow: 1,
-              }}
+              contentContainerStyle={
+                {
+                  // justifyContent: "center",
+                  // alignItems: "center",
+                  // flexGrow: 1,
+                }
+              }
             >
-              <View>
+              <View style={styles.container}>
                 <Image
                   source={{ uri: characterInfo.image }}
-                  style={{
-                    width: 310,
-                    height: 280,
-                    borderTopLeftRadius: 20,
-                    borderTopRightRadius: 20,
-                    alignSelf: "center",
-                  }}
+                  style={styles.image}
                 />
-                <View
+                <View className="py-8 w-full">
+                  <View className="flex-row justify-between mb-4">
+                    {/* Columna Status */}
+                    <View
+                      className="flex-1 pt-4 "
+                      style={{
+                        borderTopWidth: 1,
+                        borderTopColor: theme.primary + "40",
+                      }}
+                    >
+                      <Text style={styles.labelStyle}>Status</Text>
+                      <Status state={characterInfo.status} theme={theme} />
+                    </View>
+
+                    {/* Columna Species */}
+                    <View
+                      className="flex-1 pt-4 ml-4"
+                      style={{
+                        borderTopWidth: 1,
+                        borderTopColor: theme.primary + "40",
+                      }}
+                    >
+                      <Text style={styles.labelStyle}>Species</Text>
+                      <Text style={styles.text}>{characterInfo.species}</Text>
+                    </View>
+                  </View>
+
+                  {/* Línea Divisoria */}
+                  <View
+                    className="h-[1px] w-full mb-6"
+                    style={{ backgroundColor: theme.primary + "40" }}
+                  />
+
+                  {/* Fila Inferior: Origin */}
+                  <View>
+                    <Text style={styles.labelStyle}>Origin</Text>
+                    <Text style={styles.text}>
+                      {characterInfo.originPlace || "Unknown"}
+                    </Text>
+                  </View>
+                </View>
+
+                <TouchableHighlight
+                  underlayColor={"#13ec5b"}
+                  // onPress={goToHome}
                   style={{
-                    backgroundColor: "#3c3e44",
-                    padding: 20,
-                    borderBottomLeftRadius: 20,
-                    borderBottomRightRadius: 20,
-                    width: 310,
+                    width: "100%",
+                    // minWidth: 84,
+                    padding: 10,
+                    paddingHorizontal: 20,
+                    backgroundColor: theme.primary,
+                    borderRadius: 8,
                   }}
                 >
-                  <Text
+                  <View
                     style={{
-                      color: "white",
-                      fontSize: 24,
-                      marginBottom: 5,
-                      fontWeight: "400",
-                      fontFamily: "BBH-Sans-Hegarty",
+                      flex: 1,
+                      alignItems: "center",
+                      flexDirection: "row",
+                      justifyContent: "center",
                     }}
                   >
-                    {characterInfo.name}
+                    <IonIcons name="heart-outline" />
+                    <Text
+                      style={{
+                        fontWeight: "700",
+                        color: "#000",
+                        textAlign: "center",
+                        marginLeft: 10,
+                      }}
+                    >
+                      Add to favorites
+                    </Text>
+                  </View>
+                </TouchableHighlight>
+
+                <View>
+                  <Text isTitle style={{ color: theme.text, marginLeft: 0 }}>
+                    Episodes
                   </Text>
-                  <Status
-                    state={characterInfo.status}
-                    species={characterInfo.species}
-                  />
-                  <Text style={styles.title}>Origin:</Text>
-                  <Text style={styles.text}>{characterInfo.originPlace}</Text>
-
-                  <Text style={styles.title}>Location:</Text>
-                  <Text style={styles.text}>{characterInfo.location.name}</Text>
-
-                  <Text style={styles.title}>Episodes:</Text>
-                  <Text style={styles.text}>{characterInfo.numEpisodes}</Text>
                 </View>
               </View>
             </ScrollView>
@@ -99,13 +156,30 @@ export default function CharacterDetail() {
   );
 }
 
-const styles = StyleSheet.create({
-  title: {
-    fontSize: 14,
-    color: "#9e9e9e",
-    marginTop: 20,
-  },
-  text: {
-    color: "white",
-  },
-});
+const styling = (theme) =>
+  StyleSheet.create({
+    container: {
+      paddingTop: 20,
+      paddingHorizontal: 20,
+      flex: 1,
+      width: "100%",
+    },
+    image: {
+      width: "100%",
+      aspectRatio: 1,
+      borderRadius: 20,
+      alignSelf: "center",
+    },
+    labelStyle: {
+      color: theme.primary,
+      fontSize: 14,
+    },
+    title: {
+      fontSize: 14,
+      color: "#9e9e9e",
+      marginTop: 20,
+    },
+    text: {
+      color: theme?.text,
+    },
+  });
