@@ -9,7 +9,14 @@ import { styled } from "nativewind";
 
 const StyledPressable = styled(Pressable);
 
-export default function Card({ icon, title, code, description, url }) {
+export default function Card({
+  icon,
+  title,
+  titleCard,
+  code,
+  description,
+  url,
+}) {
   const { isDarkMode } = useColorScheme();
   const theme = isDarkMode ? darkTheme : lightTheme;
 
@@ -35,12 +42,15 @@ export default function Card({ icon, title, code, description, url }) {
               alignItems: "center",
             }}
           >
-            <View>
-              <GlobalText style={styles.title}>{title}</GlobalText>
-              {code ? (
-                <GlobalText style={styles.text}>{code}</GlobalText>
-              ) : null}
-              <GlobalText style={styles.text}>{description}</GlobalText>
+            <View style={{ flex: 1, marginRight: 10 }}>
+              {title && <GlobalText style={styles.title}>{title}</GlobalText>}
+              {titleCard && (
+                <GlobalText style={styles.titleCard}>{titleCard}</GlobalText>
+              )}
+              {code && <GlobalText style={styles.code}>{code}</GlobalText>}
+              {description && (
+                <GlobalText style={styles.text}>{description}</GlobalText>
+              )}
             </View>
             <IonIcons name={"arrow-forward"} color={theme.cardText} />
           </View>
@@ -53,7 +63,7 @@ export default function Card({ icon, title, code, description, url }) {
 const styling = (theme) =>
   StyleSheet.create({
     container: {
-      width: "95%",
+      width: "100%",
       backgroundColor: theme?.cardBg,
       flexDirection: "row",
       alignItems: "center",
@@ -73,6 +83,16 @@ const styling = (theme) =>
     text: {
       color: theme?.cardText,
       fontSize: 14,
+    },
+    code: {
+      color: theme?.textColorPrimary,
+      fontSize: 14,
+    },
+
+    titleCard: {
+      color: theme?.text,
+      fontSize: 16,
+      // marginTop: 0,
     },
     title: {
       fontFamily: "DM-Sans-Bold",

@@ -88,7 +88,7 @@ export default function Home() {
             </View>
           </>
         )}
-        <View style={{ paddingBottom: 20 }}>
+        <View style={{ paddingBottom: 20, paddingHorizontal: 15 }}>
           <Text
             isTitle={true}
             style={{

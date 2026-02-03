@@ -4,6 +4,9 @@ export const lightTheme = {
   text: "#1e2939",
   primary: "#97ce4c",
 
+  primarySecondary: "#13ec5b",
+
+  textColorPrimary: "#959aa4",
   cardText: "#959aa4",
   cardIconsBg: "#eaf5db",
   cardBg: "#ffffff",
@@ -16,9 +19,12 @@ export const darkTheme = {
   text: "#FFFFFF",
   primary: "#13ec5b",
 
+  primarySecondary: "#13ec5b",
+
   cardText: "#abb0b9",
   cardIconsBg: "#234e33",
   cardBg: "#27272a",
+  textColorPrimary: "#13ec5b",
   // ... other dark theme colors
   // ... other dark theme styles
 };

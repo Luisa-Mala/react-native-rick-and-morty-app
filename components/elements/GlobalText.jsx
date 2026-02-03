@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: 16,
     marginTop: 20,
-    marginLeft: 16,
     fontFamily: "BBH-Sans-Hegarty",
   },
 });
