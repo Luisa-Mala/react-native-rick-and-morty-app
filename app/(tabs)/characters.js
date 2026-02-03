@@ -23,13 +23,13 @@ export default function Characters() {
   return (
     <View style={{ flex: 1, backgroundColor: theme.background }}>
       <Text isTitle style={{ color: theme.text, paddingHorizontal: 15 }}>
-        Personajes
+        Characters
       </Text>
 
       <SearchBar
         value={query}
         onChangeText={setQuery}
-        placeholder="Buscar personaje..."
+        placeholder="Find a character..."
       />
 
       {characters.length === 0 ? (
@@ -50,7 +50,7 @@ export default function Characters() {
             <Text
               style={{ color: theme.text, textAlign: "center", marginTop: 20 }}
             >
-              No hay resultados para "{query}"
+              There are no results for "{query}"
             </Text>
           )}
         />

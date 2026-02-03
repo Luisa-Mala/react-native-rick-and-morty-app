@@ -44,15 +44,15 @@ export default function Index() {
               fontSize: 32,
               fontFamily: "BBH-Sans-Hegarty",
               color: theme.text,
-              lineHeight: 33,
+              lineHeight: 38,
             }}
           >
-            Bienvenido a este universo
+            Get ready for the adventure!
           </Text>
 
           <Text className="text-center pb-8 px-8" style={{ color: theme.text }}>
-            Tu portal a todos los personajes, lugares y episodios del multiverso
-            de Rick y Morty.
+            Your portal to all the characters, locations, and episodes of the
+            Rick and Morty multiverse.
           </Text>
 
           <TouchableHighlight

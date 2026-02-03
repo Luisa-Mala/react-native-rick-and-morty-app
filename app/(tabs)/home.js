@@ -58,12 +58,12 @@ export default function Home() {
             >
               <Text
                 className="text-white pl-5 pb-1"
-                style={{ fontSize: 24, fontFamily: "BBH-Sans-Hegarty" }}
+                style={{ fontSize: 28, fontFamily: "BBH-Sans-Hegarty" }}
               >
-                Bienvenido explorador
+                Welcome explorer
               </Text>
               <Text className=" text-white pl-5 pb-5">
-                ¿Listo para una nueva aventura?
+                Ready for a new adventure?
               </Text>
             </LinearGradient>
           </ImageBackground>
@@ -77,11 +77,11 @@ export default function Home() {
         ) : (
           <>
             <View style={{ flex: 1 }}>
-              <Slider title={"Personajes Populares"} characters={characters} />
+              <Slider title={"Popular Figures"} characters={characters} />
             </View>
             <View style={{ flex: 1 }}>
               <Slider
-                title={"Ultimos episodios"}
+                title={"Latest Episodes"}
                 widthCard={250}
                 heightCard={150}
               />
@@ -95,25 +95,25 @@ export default function Home() {
               color: theme.text,
             }}
           >
-            Explora el Multiverso
+            Explore the Multiverse
           </Text>
           <View className="flex flex-col items-center">
             <Card
               icon={"people-outline"}
-              title={"Personajes"}
-              description={"Ver todos los personajes"}
+              title={"Characters"}
+              description={"View all characters"}
               url={"/characters"}
             />
 
             <Card
-              title={"Episodios"}
-              description={"Lista de episodios"}
+              title={"Episodes"}
+              description={"View all episodes"}
               url={"/episodes"}
             />
             <Card
               icon={"planet-outline"}
-              title={"Ubicaciones"}
-              description={"Explorar ubicaciones"}
+              title={"Locations"}
+              description={"Explore locations"}
               url={"/location"}
             />
           </View>

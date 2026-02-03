@@ -24,7 +24,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="characters"
         options={{
-          title: "Personajes",
+          title: "Characters",
           tabBarIcon: ({ color }) => (
             <IonIcons name="people-outline" color={color} />
           ),
@@ -33,14 +33,14 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="episodes"
         options={{
-          title: "Episodios",
+          title: "Episodes",
           tabBarIcon: ({ color }) => <EpisodeIcon color={color} />,
         }}
       />
       <Tabs.Screen
         name="locations"
         options={{
-          title: "Ubicaciones",
+          title: "Locations",
           tabBarIcon: ({ color }) => (
             <IonIcons name="planet-outline" color={color} />
           ),

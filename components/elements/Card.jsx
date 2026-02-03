@@ -52,7 +52,7 @@ export default function Card({
                 <GlobalText style={styles.text}>{description}</GlobalText>
               )}
             </View>
-            <IonIcons name={"arrow-forward"} color={theme.cardText} />
+            <IonIcons name={"chevron-forward"} color={theme.cardText} />
           </View>
         </View>
       </StyledPressable>
