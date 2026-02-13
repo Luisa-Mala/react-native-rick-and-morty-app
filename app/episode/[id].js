@@ -40,6 +40,7 @@ export default function EpisodeDetail() {
                 fontWeight: "bold",
                 fontSize: 18,
                 color: "black",
+                textAlign: "center",
               }}
             >
               Episode Details

@@ -59,6 +59,7 @@ export default function CharacterDetail() {
                 fontWeight: "bold",
                 fontSize: 18,
                 color: "black",
+                textAlign: "center",
               }}
             >
               {characterInfo ? characterInfo.name : "Loading..."}
