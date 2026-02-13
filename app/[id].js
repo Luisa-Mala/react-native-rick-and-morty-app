@@ -183,7 +183,7 @@ export default function CharacterDetail() {
                         <Card
                           code={item.code}
                           titleCard={item.name}
-                          url={`/${item.id}`}
+                          url={`/episode/${item.id}`}
                         />
                       </View>
                     ))

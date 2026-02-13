@@ -22,22 +22,24 @@ export function CharacterCard({ character }) {
   const styles = styling(theme);
 
   return (
-    <Link href={`/${character.id}`} asChild>
-      <StyledPressable className="active:opacity-70">
-        <View key={character.id} style={styles.card}>
-          <Image source={{ uri: character.image }} style={styles.image} />
-          <View style={{ flex: 1 }}>
-            <Text style={styles.title}>{character.name}</Text>
-            <Text style={styles.text}>{character.species}</Text>
-          </View>
-          <Status state={character.status} theme={theme} />
-        </View>
-      </StyledPressable>
-    </Link>
+    <View key={character.id} style={styles.card}>
+      <Image source={{ uri: character.image }} style={styles.image} />
+      <View style={{ flex: 1 }}>
+        <Text style={styles.title}>{character.name}</Text>
+        {character.species && (
+          <Text style={styles.text}>{character.species}</Text>
+        )}
+      </View>
+      <Status state={character.status} theme={theme} />
+    </View>
   );
 }
 
-export default function AnimatedCharacterCard({ character, index }) {
+export default function AnimatedCharacterCard({
+  character,
+  index,
+  isLinked = true,
+}) {
   const opacity = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -51,7 +53,15 @@ export default function AnimatedCharacterCard({ character, index }) {
 
   return (
     <Animated.View style={{ opacity }}>
-      <CharacterCard character={character} />
+      {isLinked ? (
+        <Link href={`/${character.id}`} asChild>
+          <StyledPressable className="active:opacity-70">
+            <CharacterCard character={character} />
+          </StyledPressable>
+        </Link>
+      ) : (
+        <CharacterCard character={character} />
+      )}
     </Animated.View>
   );
 }
