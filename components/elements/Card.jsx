@@ -23,8 +23,47 @@ export default function Card({
   const styles = styling(theme);
 
   return (
-    <Link href={url} asChild>
-      <StyledPressable className="active:opacity-70">
+    <>
+      {url ? (
+        <Link href={url} asChild>
+          <StyledPressable className="active:opacity-70">
+            <View style={styles.container}>
+              <View style={styles.iconContainer}>
+                {icon ? (
+                  <IonIcons name={icon} color={theme.primary} />
+                ) : (
+                  <EpisodeIcon color={theme.primary} />
+                )}
+              </View>
+
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <View style={{ flex: 1, marginRight: 10 }}>
+                  {title && (
+                    <GlobalText style={styles.title}>{title}</GlobalText>
+                  )}
+                  {titleCard && (
+                    <GlobalText style={styles.titleCard}>
+                      {titleCard}
+                    </GlobalText>
+                  )}
+                  {code && <GlobalText style={styles.code}>{code}</GlobalText>}
+                  {description && (
+                    <GlobalText style={styles.text}>{description}</GlobalText>
+                  )}
+                </View>
+                <IonIcons name={"chevron-forward"} color={theme.cardText} />
+              </View>
+            </View>
+          </StyledPressable>
+        </Link>
+      ) : (
         <View style={styles.container}>
           <View style={styles.iconContainer}>
             {icon ? (
@@ -52,11 +91,11 @@ export default function Card({
                 <GlobalText style={styles.text}>{description}</GlobalText>
               )}
             </View>
-            <IonIcons name={"chevron-forward"} color={theme.cardText} />
+            {/* <IonIcons name={"chevron-forward"} color={theme.cardText} /> */}
           </View>
         </View>
-      </StyledPressable>
-    </Link>
+      )}
+    </>
   );
 }
 
